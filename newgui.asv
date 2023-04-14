@@ -97,7 +97,7 @@ imshow(handles.front);
 set(handles.edit1, 'String', 'Enter side face');
 side_face=imread(uigetfile('*.jpg;*.png','Side Image'));
 
-handles.side = ImageSeparateByMode(handles.type, side_face);
+handles.side = ImageSeparateByMode(handles.type, front_face);
 guidata(hObject, handles);
 axes(handles.axes8);
 imshow(handles.side);
@@ -113,11 +113,11 @@ function coordinates_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 handles.sample=str2num(get(handles.edit3,'string'));
-[handles.topx,handles.topy,handles.frontx,handles.frontz,handles.sidey,handles.sidez]=mapCoordinates(handles.sample,handles.top,handles.front,handles.side);
+[handles.sx,handles.sy,handles.x,handles.y,handles.z,handles.zz]=saneCoordinates(handles.sample,handles.top,handles.front,handles.side);
 guidata(hObject, handles);
 set(handles.edit1, 'String', 'Coordinates generated');
 
-[handles.mxs,handles.mys,handles.mx,handles.my,handles.mz,handles.mzz]= matchVertices(handles.topx,handles.topy,handles.frontx,handles.frontz,handles.sidey,handles.sidez);
+[handles.mxs,handles.mys,handles.mx,handles.my,handles.mz,handles.mzz]= getMatrix(handles.sx,handles.sy,handles.x,handles.y,handles.z,handles.zz);
 [handles.mzz]=smoothzz(handles.mz,handles.mzz);
 handles.mxs=handles.mxs*handles.f;
 handles.mys=handles.mys*handles.f;

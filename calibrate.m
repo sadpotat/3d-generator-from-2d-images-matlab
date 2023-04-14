@@ -1,7 +1,7 @@
 function[f] = calibrate(image,length)
 
 img = separateobj1(image, 3, 1);
-[~,y]=getcoordinates(1,img);
+[~,y]=getCoordinates(1,img);
 
 %height of object
 x=max(y(1,:))-min(y(2,:));

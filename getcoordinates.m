@@ -1,4 +1,4 @@
-function[xs,ys] = getcoordinates(sample,pic)
+function[xs,ys] = getCoordinates(sample,pic)
 
 I = rgb2gray(pic);
 Ibw=im2bw(I,graythresh(I));
