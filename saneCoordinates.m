@@ -1,10 +1,10 @@
 function [sx,sy,x,y,z,zz]=saneCoordinates(sample,top,front,side)
 
-[sx,y]= getcoordinates2(sample,top);
+[sx,y]= getcoordinates(sample,top);
 [sy2,x]= getcoordinatesinv(sample,top);
 
-[sx2,z]= getcoordinates2(sample,front);
-[sy,rzz]= getcoordinates2(sample,side);
+[sx2,z]= getcoordinates(sample,front);
+[sy,rzz]= getcoordinates(sample,side);
 [zz]=reverseit(rzz);
 
 disp('Coordinates generated...')

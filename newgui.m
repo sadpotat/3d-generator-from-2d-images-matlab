@@ -79,66 +79,51 @@ function photos_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 set(handles.edit1, 'String', 'Enter top face');
-x=imread(uigetfile('*.jpg','Top Image'));
-handles.top= separateObject(x);
-[handles.top1,handles.top2]= separateobj1(x);
-handles.top3= separateobj2(x);
-if handles.type==1
-    handles.top=handles.top;
-end
+x=imread(uigetfile('*.jpg;*.png','Top Image'));
+
 if handles.type==2
-    handles.top=handles.top1;
-end
-if handles.type==3
-    handles.top=handles.top2;
-end
-if handles.type==4
-    handles.top=handles.top3;
+    handles.top=separateobj1(x, 3, 1);
+elseif handles.type==3
+    handles.top=separateobj1(x, 3, 2);
+elseif handles.type==4
+    handles.top=separateobj2(x);
+else 
+    handles.top=separateobj1(x, 1, 2);
 end
 guidata(hObject, handles);
 axes(handles.axes6);
 imshow(handles.top);
  
 set(handles.edit1, 'String', 'Enter front face');
-y=imread(uigetfile('*.jpg','Front Image'));
-handles.front=separateObject(y);
-[handles.front1,handles.front2]= separateobj1(y);
-handles.front3= separateobj2(y);
+y=imread(uigetfile('*.jpg;*.png','Front Image'));
 
-if handles.type==1
-    handles.front=handles.front;
-end
 if handles.type==2
-    handles.front=handles.front1;
+    handles.front=separateobj1(y, 3, 1);
+elseif handles.type==3
+    handles.front=separateobj1(y, 3, 2);
+elseif handles.type==4
+    handles.front=separateobj2(y);
+else 
+    handles.front=separateobj1(y, 1, 2);
 end
-if handles.type==3
-    handles.front=handles.front2;
-end
-if handles.type==4
-    handles.front=handles.front3;
-end
+
 guidata(hObject, handles);
 axes(handles.axes7);
 imshow(handles.front);
  
 set(handles.edit1, 'String', 'Enter side face');
-z=imread(uigetfile('*.jpg','Side Image'));
-handles.side=separateObject(z);
-[handles.side1,handles.side2]= separateobj1(z);
-handles.side3= separateobj2(z);
+z=imread(uigetfile('*.jpg;*.png','Side Image'));
 
-if handles.type==1
-    handles.side=handles.side;
-end
 if handles.type==2
-    handles.side=handles.side1;
+    handles.side=separateobj1(z, 3, 1);
+elseif handles.type==3
+    handles.side=separateobj1(z, 3, 2);
+elseif handles.type==4
+    handles.side=separateobj2(z);
+else 
+    handles.side=separateobj1(z, 1, 2);
 end
-if handles.type==3
-    handles.side=handles.side2;
-end
-if handles.type==4
-    handles.side=handles.side3;
-end
+
 guidata(hObject, handles);
 axes(handles.axes8);
 imshow(handles.side);
@@ -350,7 +335,7 @@ function cal_Callback(hObject, eventdata, handles)
 % hObject    handle to cal (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-handles.cal=imread(uigetfile('*.png'));
+handles.cal=imread(uigetfile('*.png;*.jpg'));
 set(handles.edit1, 'String', 'Image Entered');
 guidata(hObject, handles);
 
