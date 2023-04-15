@@ -114,19 +114,24 @@ function coordinates_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 handles.sample=str2num(get(handles.edit3,'string'));
 [handles.topx,handles.topy,handles.frontx,handles.frontz,handles.sidey,handles.sidez]=mapCoordinates(handles.sample,handles.top,handles.front,handles.side);
+[handles.sideheightx, handles.sideheighty] = SidefaceHeight(handles.sample,handles.top);
 guidata(hObject, handles);
 set(handles.edit1, 'String', 'Coordinates generated');
 
-[handles.mxs,handles.mys,handles.mx,handles.my,handles.mz,handles.mzz]= matchVertices(handles.topx,handles.topy,handles.frontx,handles.frontz,handles.sidey,handles.sidez);
-[handles.mzz]=smoothzz(handles.mz,handles.mzz);
-handles.mxs=handles.mxs*handles.f;
-handles.mys=handles.mys*handles.f;
-handles.mx=handles.mx*handles.f;
-handles.my=handles.my*handles.f;
-handles.mz=handles.mz*handles.f;
-handles.mzz=handles.mzz*handles.f;
+[handles.mtopx,handles.mtopy,handles.mfrontx,handles.mfrontz,handles.msidey,handles.msidez,handles.msideheightx,handles.msideheighty]= matchVertices(handles.topx,handles.topy,handles.frontx,handles.frontz,handles.sidey,handles.sidez,handles.sideheightx, handles.sideheighty);
+[] = getTriplets(handles.topx,handles.topy,handles.frontx,handles.frontz,handles.sidey,handles.sidez,handles.sideheightx, handles.sideheighty)
+
+handles.mtopx=handles.mtopx*handles.f;
+handles.mtopy=handles.mtopy*handles.f;
+handles.mfrontx=handles.mfrontx*handles.f;
+handles.mfrontz=handles.mfrontz*handles.f;
+handles.msidey=handles.msidey*handles.f;
+handles.msidez=handles.msidez*handles.f;
+handles.msideheightx=handles.msideheightx*handles.f;
+handles.msideheighty=handles.msideheighty*handles.f;
 guidata(hObject, handles);
 set(handles.edit1, 'String', 'Matrix formed');
+
 
 %table
 headers1 = {'1','2'};
